@@ -1,29 +1,38 @@
 # FifthGen
-# TCP.py:
+## Overview
+This project implements a real-time communication system for managing multiple devices in a manufacturing plant. The system supports TCP/IP communication, handles multiple devices simultaneously, and is designed to be extensible for future communication protocols.
 
-Defines the TCPDevice class, which handles the TCP/IP communication with individual devices.
-This class provides methods to connect, send data, receive data, and close the connection.
+## Features
+* TCP/IP Communication: Connects, reads, and writes data to devices using TCP/IP.
+* Simultaneous Communication: Communicates with multiple devices concurrently.
+* Extensible Protocols: Supports future additions of communication protocols.
+* Testing: Includes a stub server for testing TCP/IP communication and unit tests for code validation.
 
-CommunicationManager.py:
+## Files
+* TCP.py: Defines the TCPDevice class for handling TCP/IP communication.
+* CommunicationManager.py: Manages multiple devices and facilitates communication with them.
+* Protocol.py: Provides an abstract base class for communication protocols and a concrete implementation for TCP.
+* Stub.py: Implements a stub server for simulating device behavior for testing purposes.
+* UnitTest.py: Contains unit tests for validating the functionality of the TCPDevice and CommunicationManager classes.
 
-Defines the CommunicationManager class, which manages multiple devices and facilitates communication with them.
-This class can add devices, send data to a specific device, or communicate with all devices simultaneously using threading.
-It abstracts the communication process, allowing the use of different protocols.
+## Installation
+To set up the project, clone the repository and ensure you have Python 3 installed.
+* git clone https://github.com/yourusername/your-repository.git 
+* cd your-repository
 
-Protocol.py:
+* code execution starts from UnitTest.py file
 
-Defines a base Protocol class and a TCPProtocol class that extends it.
-The base class provides a common interface for different communication protocols.
-The TCPProtocol class implements this interface specifically for TCP communication.
+## Usage
 
-Stub.py:
+* from CommunicationManager import CommunicationManager
 
-Defines a stub server that simulates a real device or server for testing purposes.
-It listens for TCP connections, receives data, and responds with a simple "ACK" message.
-This stub can be used to test your communication system without needing actual devices.
+### Initialize the communication manager
+* manager = CommunicationManager()
 
-UnitTest.py:
+### Add a device
+* manager.add_device("device1", "127.0.0.1", 8000)
 
-Contains unit tests for the TCPDevice and CommunicationManager classes.
-The tests use Python’s unittest framework and the unittest.mock library to simulate device behavior and verify the functionality of the communication methods.
-This file ensures that the components of your system work as expected.
+### Communicate with a device
+* response = manager.communicate("device1", "Hello, device!")
+* print(response)  # Should print "ACK" if the stub server is running
+
